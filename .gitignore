@@ -34,3 +34,6 @@ Desktop.ini
 
 # Local watchdog output
 oni-watch-result.json
+
+# Release packages
+dist/

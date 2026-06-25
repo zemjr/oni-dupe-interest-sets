@@ -157,6 +157,14 @@ Local install command:
 
 The local install script is Windows-oriented and preserves an existing `Config.json`. It only creates the default config when the target mod folder does not already have one.
 
+Release package command:
+
+```powershell
+.\scripts\package-release.ps1
+```
+
+The package script builds the mod and creates `dist/DupeInterestSets-vX.Y.Z.zip` with only the files needed for Steam Workshop or manual install.
+
 ## ONI Update Watchdog
 
 The repository includes a GitHub Actions watchdog that checks the Oxygen Not Included public Steam build once per day.
