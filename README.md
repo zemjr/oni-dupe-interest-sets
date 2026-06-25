@@ -1,5 +1,7 @@
 # Dupe Interest Sets
 
+[![ONI Update Watchdog](https://github.com/zemjr/oni-dupe-interest-sets/actions/workflows/oni-update-watchdog.yml/badge.svg)](https://github.com/zemjr/oni-dupe-interest-sets/actions/workflows/oni-update-watchdog.yml)
+
 Dupe Interest Sets adds configurable interest-set categories to the duplicant reroll dropdown in Oxygen Not Included.
 
 Each custom category represents a fixed set of 1 to 3 duplicant interests. Vanilla categories are left untouched and continue to work normally.
