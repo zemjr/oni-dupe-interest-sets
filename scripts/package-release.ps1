@@ -44,6 +44,7 @@ Copy-Item -Force $plib (Join-Path $packageRoot "PLib.dll")
 Copy-Item -Force (Join-Path $repo "mod.yaml") (Join-Path $packageRoot "mod.yaml")
 Copy-Item -Force $modInfoPath (Join-Path $packageRoot "mod_info.yaml")
 Copy-Item -Force (Join-Path $repo "Config.json") (Join-Path $packageRoot "Config.json")
+Copy-Item -Force (Join-Path $repo "CHANGELOG.md") (Join-Path $packageRoot "CHANGELOG.md")
 Copy-Item -Force (Join-Path $repo "README.md") (Join-Path $packageRoot "README.md")
 Copy-Item -Force (Join-Path $repo "STEAM.md") (Join-Path $packageRoot "STEAM.md")
 
