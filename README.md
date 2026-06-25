@@ -155,6 +155,28 @@ Local install command:
 
 The local install script is Windows-oriented and preserves an existing `Config.json`. It only creates the default config when the target mod folder does not already have one.
 
+## ONI Update Watchdog
+
+The repository includes a GitHub Actions watchdog that checks the Oxygen Not Included public Steam build once per day.
+
+Files:
+
+```text
+.github/oni-watch.json
+.github/workflows/oni-update-watchdog.yml
+scripts/check-oni-update.ps1
+```
+
+The script compares the current public Steam build ID with the baseline in `.github/oni-watch.json`. If the build changes, the workflow opens a compatibility-check issue with a manual checklist.
+
+Run it locally:
+
+```powershell
+pwsh ./scripts/check-oni-update.ps1 -OutputPath oni-watch-result.json
+```
+
+The watchdog does not prove compatibility automatically. It only detects that ONI changed and creates a reminder to rebuild and verify the Harmony patches.
+
 ## Known Limitations
 
 - Changes require a game restart to affect the duplicant dropdown.

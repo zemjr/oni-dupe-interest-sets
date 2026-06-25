@@ -31,3 +31,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Local watchdog output
+oni-watch-result.json
