@@ -39,6 +39,9 @@ namespace InterestPicker
         public const string RestartNow = Root + "DIALOG.RESTART_NOW";
         public const string Later = Root + "DIALOG.LATER";
         public const string NewCategory = Root + "DIALOG.NEW_CATEGORY";
+        public const string DisabledMessage = Root + "ERROR.DISABLED_MESSAGE";
+        public const string DisabledOptionsMessage = Root + "ERROR.DISABLED_OPTIONS_MESSAGE";
+        public const string Ok = Root + "ERROR.OK";
 
         private static readonly Dictionary<string, string> Fallbacks = new Dictionary<string, string>(StringComparer.Ordinal);
 

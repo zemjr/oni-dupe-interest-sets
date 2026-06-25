@@ -26,5 +26,8 @@
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.RESTART_MESSAGE": "Configuration saved to Config.json.\n\nRestart the game to rebuild the duplicant dropdown with the new categories.",
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.RESTART_NOW": "Restart Now",
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.LATER": "Later",
-  "STRINGS.UI.DUPEINTERESTSETS.DIALOG.NEW_CATEGORY": "New Category"
+  "STRINGS.UI.DUPEINTERESTSETS.DIALOG.NEW_CATEGORY": "New Category",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.DISABLED_MESSAGE": "Dupe Interest Sets disabled itself for this session.\n\nThe mod hit an unexpected compatibility error and stopped modifying duplicant generation to avoid crashing the game.\n\nPlease check Steam Workshop or GitHub for an updated version. If the problem continues, send Player.log with your ONI build number.",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.DISABLED_OPTIONS_MESSAGE": "Dupe Interest Sets disabled itself for this session after a compatibility error.\n\nYou can still edit Config.json, but custom categories will not affect duplicant generation until the game restarts successfully with a compatible mod version.",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.OK": "OK"
 }

@@ -22,8 +22,11 @@ namespace InterestPicker
         public static string ModPath { get; set; }
         public static string ModStaticId { get; set; }
         public static Label ModLabel { get; set; }
+        public static bool DisabledDueToError { get; private set; }
+        public static string DisableReason { get; private set; }
+        public static bool DisableWarningShown { get; set; }
 
-        public static bool HasRegisteredCategories => Categories.Count > 0;
+        public static bool HasRegisteredCategories => !DisabledDueToError && Categories.Count > 0;
 
         public static void Log(string message)
         {
@@ -40,9 +43,20 @@ namespace InterestPicker
             Debug.LogError(Prefix + message + "\n" + exception);
         }
 
+        public static void DisableForSession(string reason, Exception exception)
+        {
+            if (DisabledDueToError)
+                return;
+
+            DisabledDueToError = true;
+            DisableReason = reason;
+            ClearRegisteredState();
+            Error(reason + " Disabling Dupe Interest Sets for this session. Vanilla behavior will continue. Check Steam Workshop or GitHub for an updated version. If the problem continues, report it with Player.log and your ONI build number.", exception);
+        }
+
         public static bool IsCustomCategory(string id)
         {
-            return id != null && CustomSkillGroupIds.Contains(id);
+            return !DisabledDueToError && id != null && CustomSkillGroupIds.Contains(id);
         }
 
         public static int GetCustomCategoryOrder(string id)
@@ -54,7 +68,7 @@ namespace InterestPicker
 
         public static bool TryGetCategory(string id, out RegisteredCategory category)
         {
-            if (id == null)
+            if (DisabledDueToError || id == null)
             {
                 category = null;
                 return false;
@@ -64,9 +78,10 @@ namespace InterestPicker
 
         public static void RegisterConfiguredSkillGroups()
         {
-            Categories.Clear();
-            CustomSkillGroupIds.Clear();
-            CustomCategoryOrder.Clear();
+            ClearRegisteredState();
+
+            if (DisabledDueToError)
+                return;
 
             ModConfig config = LoadConfig();
             if (config == null)
@@ -85,9 +100,15 @@ namespace InterestPicker
             }
 
             Db db = Db.Get();
+            if (db?.SkillGroups?.resources == null)
+                throw new InvalidOperationException("Db.SkillGroups was not available during Db.Initialize postfix.");
+
             Dictionary<string, SkillGroup> vanillaSkillGroups = db.SkillGroups.resources
-                .Where(group => group.allowAsAptitude)
+                .Where(group => group != null && group.allowAsAptitude)
                 .ToDictionary(group => group.Id, group => group, StringComparer.OrdinalIgnoreCase);
+
+            if (vanillaSkillGroups.Count == 0)
+                throw new InvalidOperationException("No vanilla SkillGroups were available as aptitudes.");
 
             HashSet<string> seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < config.CustomCategories.Count; i++)
@@ -103,6 +124,13 @@ namespace InterestPicker
             }
 
             Log("Categorias custom válidas registradas: " + Categories.Count);
+        }
+
+        public static void ClearRegisteredState()
+        {
+            Categories.Clear();
+            CustomSkillGroupIds.Clear();
+            CustomCategoryOrder.Clear();
         }
 
         public static ModConfig LoadConfigForEditor()
@@ -313,14 +341,20 @@ namespace InterestPicker
 
         public static bool GenerateAptitudesPrefix(MinionStartingStats stats, string guaranteedAptitudeID)
         {
-            if (!HasRegisteredCategories)
+            if (DisabledDueToError || !HasRegisteredCategories)
                 return true;
 
-            if (stats.personality.model == BionicMinionConfig.MODEL)
+            if (stats?.personality?.model == BionicMinionConfig.MODEL)
                 return true;
+
+            if (stats?.skillAptitudes == null)
+                throw new InvalidOperationException("MinionStartingStats.skillAptitudes was not available.");
+
+            Db db = Db.Get();
+            if (db?.SkillGroups?.resources == null)
+                throw new InvalidOperationException("Db.SkillGroups was not available during aptitude generation.");
 
             stats.skillAptitudes.Clear();
-            Db db = Db.Get();
 
             if (TryGetCategory(guaranteedAptitudeID, out RegisteredCategory category))
             {

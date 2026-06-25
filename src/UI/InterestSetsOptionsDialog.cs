@@ -24,6 +24,17 @@ namespace InterestPicker.UI
         {
             try
             {
+                if (InterestPickerMod.DisabledDueToError)
+                {
+                    PUIElements.ShowConfirmDialog(
+                        null,
+                        ModStrings.Get(ModStrings.DisabledOptionsMessage),
+                        null,
+                        null,
+                        ModStrings.Get(ModStrings.Ok),
+                        null);
+                }
+
                 ModConfig config = InterestPickerMod.LoadConfigForEditor() ?? InterestPickerMod.CreateDefaultConfig();
                 Rows.Clear();
                 if (config.CustomCategories != null)

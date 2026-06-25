@@ -26,5 +26,8 @@
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.RESTART_MESSAGE": "Configuração salva no Config.json.\n\nReinicie o jogo para reconstruir o dropdown de duplicantes com as novas categorias.",
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.RESTART_NOW": "Reiniciar Agora",
   "STRINGS.UI.DUPEINTERESTSETS.DIALOG.LATER": "Depois",
-  "STRINGS.UI.DUPEINTERESTSETS.DIALOG.NEW_CATEGORY": "Nova Categoria"
+  "STRINGS.UI.DUPEINTERESTSETS.DIALOG.NEW_CATEGORY": "Nova Categoria",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.DISABLED_MESSAGE": "O Dupe Interest Sets se desativou nesta sessão.\n\nO mod encontrou um erro inesperado de compatibilidade e parou de modificar a geração de duplicantes para evitar um crash do jogo.\n\nVerifique se existe uma versão nova no Steam Workshop ou no GitHub. Se o problema continuar, envie o Player.log com o número da build do ONI.",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.DISABLED_OPTIONS_MESSAGE": "O Dupe Interest Sets se desativou nesta sessão após um erro de compatibilidade.\n\nVocê ainda pode editar o Config.json, mas as categorias customizadas não vão afetar a geração de duplicantes até o jogo reiniciar com uma versão compatível do mod.",
+  "STRINGS.UI.DUPEINTERESTSETS.ERROR.OK": "OK"
 }

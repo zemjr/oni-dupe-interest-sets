@@ -14,7 +14,7 @@ namespace InterestPicker.Patches
             }
             catch (Exception ex)
             {
-                InterestPickerMod.Error("Failed to apply custom aptitudes; falling back to vanilla behavior.", ex);
+                InterestPickerMod.DisableForSession("Failed to apply custom aptitudes; falling back to vanilla behavior.", ex);
                 return true;
             }
         }

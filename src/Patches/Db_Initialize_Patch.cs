@@ -15,7 +15,7 @@ namespace InterestPicker.Patches
             }
             catch (Exception ex)
             {
-                InterestPickerMod.Error("Unexpected error while registering custom SkillGroups.", ex);
+                InterestPickerMod.DisableForSession("Unexpected error while registering custom SkillGroups.", ex);
             }
         }
     }

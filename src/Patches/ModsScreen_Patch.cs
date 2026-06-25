@@ -12,6 +12,8 @@ namespace InterestPicker.Patches
         {
             try
             {
+                ShowDisabledWarningIfNeeded();
+
                 Mod target = Global.Instance.modManager.FindMod(mod);
                 if (target == null || !target.IsEnabledForActiveDlc())
                     return;
@@ -31,6 +33,21 @@ namespace InterestPicker.Patches
             {
                 InterestPickerMod.Error("Failed to show restart warning after enabling the mod.", ex);
             }
+        }
+
+        private static void ShowDisabledWarningIfNeeded()
+        {
+            if (!InterestPickerMod.DisabledDueToError || InterestPickerMod.DisableWarningShown)
+                return;
+
+            InterestPickerMod.DisableWarningShown = true;
+            PUIElements.ShowConfirmDialog(
+                null,
+                ModStrings.Get(ModStrings.DisabledMessage),
+                null,
+                null,
+                ModStrings.Get(ModStrings.Ok),
+                null);
         }
     }
 }

@@ -11,6 +11,9 @@ namespace InterestPicker.Patches
         {
             try
             {
+                if (InterestPickerMod.DisabledDueToError)
+                    return true;
+
                 SkillGroup left = a as SkillGroup;
                 SkillGroup right = b as SkillGroup;
                 bool leftCustom = left != null && InterestPickerMod.IsCustomCategory(left.Id);
@@ -40,7 +43,7 @@ namespace InterestPicker.Patches
             }
             catch (Exception ex)
             {
-                InterestPickerMod.Error("Failed to sort dropdown; falling back to vanilla sort.", ex);
+                InterestPickerMod.DisableForSession("Failed to sort dropdown; falling back to vanilla sort.", ex);
                 return true;
             }
         }
