@@ -33,9 +33,9 @@ namespace InterestPicker.Patches
 
                 int leftOrder = InterestPickerMod.GetCustomCategoryOrder(left.Id);
                 int rightOrder = InterestPickerMod.GetCustomCategoryOrder(right.Id);
-                __result = leftOrder.CompareTo(rightOrder);
+                __result = rightOrder.CompareTo(leftOrder);
                 if (__result == 0)
-                    __result = string.Compare(a.GetProperName(), b.GetProperName(), StringComparison.CurrentCulture);
+                    __result = string.Compare(b.GetProperName(), a.GetProperName(), StringComparison.CurrentCulture);
                 return false;
             }
             catch (Exception ex)
