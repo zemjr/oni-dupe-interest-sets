@@ -1,0 +1,33 @@
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Debug symbols and local build artifacts
+*.pdb
+*.mdb
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Decompilation / investigation scratch files
+.phase1_decompile/
+.ui_investigation/
+*.decompiled.cs
+
+# IDE/editor files
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs
+*.log
