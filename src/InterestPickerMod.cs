@@ -43,6 +43,32 @@ namespace InterestPicker
             Debug.LogError(Prefix + message + "\n" + exception);
         }
 
+        public static string GetModVersion()
+        {
+            try
+            {
+                string modInfoPath = Path.Combine(ModPath ?? string.Empty, "mod_info.yaml");
+                if (!File.Exists(modInfoPath))
+                    return "unknown";
+
+                foreach (string line in File.ReadAllLines(modInfoPath))
+                {
+                    string trimmed = line.Trim();
+                    if (!trimmed.StartsWith("version:", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    string version = trimmed.Substring("version:".Length).Trim().Trim('"', '\'');
+                    return string.IsNullOrWhiteSpace(version) ? "unknown" : version;
+                }
+            }
+            catch (Exception ex)
+            {
+                Warn("Failed to read version from mod_info.yaml: " + ex.Message);
+            }
+
+            return "unknown";
+        }
+
         public static void DisableForSession(string reason, Exception exception)
         {
             if (DisabledDueToError)

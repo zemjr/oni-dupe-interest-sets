@@ -6,14 +6,12 @@ namespace InterestPicker
 {
     public sealed class Loader : UserMod2
     {
-        public const string Version = "0.3.0";
-
         public override void OnLoad(Harmony harmony)
         {
             InterestPickerMod.ModPath = path;
             InterestPickerMod.ModStaticId = mod.staticID;
             InterestPickerMod.ModLabel = mod.label;
-            InterestPickerMod.Log("Mod loaded - version " + Version);
+            InterestPickerMod.Log("Mod loaded - version " + InterestPickerMod.GetModVersion());
             ModStrings.Register();
             new POptions().RegisterOptions(this, typeof(ModOptions));
             base.OnLoad(harmony);
